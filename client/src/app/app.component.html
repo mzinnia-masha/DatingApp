@@ -1,0 +1,8 @@
+<h1>{{title}}</h1>
+<ul>
+    <li *ngFor="let a of users"[value]="a.id">
+        {{ a.id }}-
+        {{ a.userName }}
+   </li>
+
+</ul>
