@@ -5,11 +5,9 @@ using System.Threading.Tasks;
 
 namespace API.Entities
 {
-    public class AppUser
+    public class UserDTO
     {
-        public int Id { get; set; }
         public string UserName { get; set; }
-        public byte[] PasswordHash { get; set; }
-        public byte[] PasswordSalt { get; set; }
+        public string token { get; set; }
     }
 }
