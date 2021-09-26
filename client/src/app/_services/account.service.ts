@@ -59,6 +59,7 @@ register(model:any){
   setCurrentUser(users: User) {
     this.currentUserSource.next(users);
   }
+  
   logout() {
     localStorage.removeItem('user');
     this.currentUserSource.next(null);
