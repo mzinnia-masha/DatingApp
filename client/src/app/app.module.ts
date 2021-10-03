@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from  '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from  '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavComponent } from './nav/nav.component'
 import { FormsModule } from '@angular/forms';
@@ -15,6 +15,11 @@ import { MemberListComponent } from './members/member-list/member-list.component
 import { MessagesComponent } from './messages/messages.component';
 import { ListsComponent } from './lists/lists.component';
 import { ToastrModule } from 'ngx-toastr';
+import { TestErrorsComponent } from './error/test-errors/test-errors.component';
+import { ErrorsInterceptor } from './interceptor/errors.interceptor';
+import { NotFoundComponent } from './error/not-found/not-found.component';
+import { ServerErrorComponent } from './error/server-error/server-error.component';
+
 
 @NgModule({
   declarations: [
@@ -25,17 +30,25 @@ import { ToastrModule } from 'ngx-toastr';
     MemberDetailComponent,
     MemberListComponent,
     MessagesComponent,
-    ListsComponent
+    ListsComponent,
+    TestErrorsComponent,
+    NotFoundComponent,
+    ServerErrorComponent
+    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    FormsModule
+    FormsModule,ToastrModule.forRoot()
     
   ],
-  providers: [],
+  providers: [{provide:HTTP_INTERCEPTORS,
+    useClass:ErrorsInterceptor,
+   multi:true  
+   }],
+  
   bootstrap: [AppComponent]
 })
 export class AppModule { }
