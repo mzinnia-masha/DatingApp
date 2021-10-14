@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using API.Services;
 using Microsoft.EntityFrameworkCore;
+using API.Helpers;
 
 namespace API.Extensions
 {
@@ -16,8 +17,11 @@ namespace API.Extensions
 
         public static IServiceCollection AddApplicationServices(this IServiceCollection services,IConfiguration config)
         {
-            services.AddScoped<IToken_Service, TokenService>();
 
+
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IToken_Service, TokenService>();
+            services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
             services.AddDbContext<DataContext>
                 (options =>
                 {
