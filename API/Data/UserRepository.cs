@@ -30,9 +30,10 @@ namespace API.Data
                                  .SingleOrDefaultAsync();
         }
 
-        public Task<IEnumerable<MemberDTO>> GetMembersAsync()
+        public async Task<IEnumerable<MemberDTO>> GetMembersAsync()
         {
-            throw new NotImplementedException();
+            return await _context.Users.ProjectTo<MemberDTO>(_maper.ConfigurationProvider)
+                                      .ToListAsync();
         }
 
         public async Task<IEnumerable<AppUser>> GetUserAsync()

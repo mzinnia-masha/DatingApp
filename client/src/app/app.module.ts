@@ -19,7 +19,13 @@ import { TestErrorsComponent } from './error/test-errors/test-errors.component';
 import { ErrorsInterceptor } from './interceptor/errors.interceptor';
 import { NotFoundComponent } from './error/not-found/not-found.component';
 import { ServerErrorComponent } from './error/server-error/server-error.component';
+import { MemberCardComponent } from './members/member-card/member-card.component';
 
+import { JwtInterceptor } from './interceptor/jwt.interceptor';
+import { TabsModule } from 'ngx-bootstrap/tabs';
+/*import { NgxGalleryModule } from '@kolkov/ngx-gallery';*/
+
+import { NgxGalleryModule } from 'ngx-gallery-9';
 
 @NgModule({
   declarations: [
@@ -33,21 +39,28 @@ import { ServerErrorComponent } from './error/server-error/server-error.componen
     ListsComponent,
     TestErrorsComponent,
     NotFoundComponent,
-    ServerErrorComponent
+    ServerErrorComponent,
+    MemberCardComponent
     
   ],
   imports: [
+    //InMemoryWebApiModule.forRoot(InMemoryDataService, {passThruUnknownUrl: true}),
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    BsDropdownModule.forRoot(),
     BrowserAnimationsModule,
-    FormsModule,ToastrModule.forRoot()
-    
+    FormsModule,ToastrModule.forRoot(),
+    TabsModule.forRoot(),
+    NgxGalleryModule     
   ],
-  providers: [{provide:HTTP_INTERCEPTORS,
-    useClass:ErrorsInterceptor,
-   multi:true  
-   }],
+  providers: [
+    
+    {provide:HTTP_INTERCEPTORS,useClass:ErrorsInterceptor,multi:true},
+    {provide:HTTP_INTERCEPTORS,useClass:JwtInterceptor,multi:true}
+  
+  
+  ],
   
   bootstrap: [AppComponent]
 })
