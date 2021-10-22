@@ -26,6 +26,9 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 /*import { NgxGalleryModule } from '@kolkov/ngx-gallery';*/
 
 import { NgxGalleryModule } from 'ngx-gallery-9';
+import { MemberEditComponent } from './members/member-edit/member-edit.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { LoadingInterceptor } from './interceptor/loading.interceptor';
 
 @NgModule({
   declarations: [
@@ -34,13 +37,15 @@ import { NgxGalleryModule } from 'ngx-gallery-9';
     HomeComponent,
     RegisterComponent,
     MemberDetailComponent,
+    MemberEditComponent,
     MemberListComponent,
     MessagesComponent,
     ListsComponent,
     TestErrorsComponent,
     NotFoundComponent,
     ServerErrorComponent,
-    MemberCardComponent
+    MemberCardComponent,
+    MemberEditComponent
     
   ],
   imports: [
@@ -50,14 +55,17 @@ import { NgxGalleryModule } from 'ngx-gallery-9';
     HttpClientModule,
     BsDropdownModule.forRoot(),
     BrowserAnimationsModule,
-    FormsModule,ToastrModule.forRoot(),
+    FormsModule,
+    ToastrModule.forRoot(),
     TabsModule.forRoot(),
-    NgxGalleryModule     
+    NgxGalleryModule,
+    NgxSpinnerModule   
   ],
   providers: [
     
     {provide:HTTP_INTERCEPTORS,useClass:ErrorsInterceptor,multi:true},
-    {provide:HTTP_INTERCEPTORS,useClass:JwtInterceptor,multi:true}
+    {provide:HTTP_INTERCEPTORS,useClass:JwtInterceptor,multi:true},
+    {provide:HTTP_INTERCEPTORS,useClass:LoadingInterceptor,multi:true}
   
   
   ],
